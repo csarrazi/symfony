@@ -44,6 +44,8 @@ interface AdapterInterface
     /**
      * Escape a string for use in an LDAP filter or DN.
      *
+     * @deprecated Since 3.4
+     *
      * @param string $subject
      * @param string $ignore
      * @param int    $flags
