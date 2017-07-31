@@ -70,7 +70,11 @@ class MongoDbSessionHandler implements \SessionHandlerInterface
     public function __construct($mongo, array $options)
     {
         if (!($mongo instanceof \MongoDB\Client || $mongo instanceof \MongoClient || $mongo instanceof \Mongo)) {
-            throw new \InvalidArgumentException('MongoClient or Mongo instance required');
+            throw new \InvalidArgumentException('MongoDB\Client, MongoClient or Mongo instance required');
+        }
+
+        if (!$mongo instanceof \MongoDB\Client) {
+            @trigger_error(sprintf('The "mongo" extension is not supported anymore, and only supports MongoDB versions 3.0 and lower. Please use the "mongodb" extension and the mongodb/mongodb package instead.'), E_USER_DEPRECATED);
         }
 
         if (!isset($options['database']) || !isset($options['collection'])) {
